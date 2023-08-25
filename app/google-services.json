@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "851035072237",
+    "project_id": "pkart-51b77",
+    "storage_bucket": "pkart-51b77.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:851035072237:android:2c5408985d0c14b8918ee4",
+        "android_client_info": {
+          "package_name": "com.amitdroid.pkart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "851035072237-eda7nrlguvu1ngccevu71mjq2m1kak2s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWXS7OKHY91-MNyRG7064G5_ql8Xj8dOo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "851035072237-eda7nrlguvu1ngccevu71mjq2m1kak2s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:851035072237:android:811ab756dccc8427918ee4",
+        "android_client_info": {
+          "package_name": "com.amitdroid.pkartadmin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "851035072237-eda7nrlguvu1ngccevu71mjq2m1kak2s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWXS7OKHY91-MNyRG7064G5_ql8Xj8dOo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "851035072237-eda7nrlguvu1ngccevu71mjq2m1kak2s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
