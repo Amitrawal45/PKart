@@ -1,12 +1,11 @@
 package com.amitdroid.pkart.activity
 
-import android.content.ContentValues.TAG
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.content.Intent
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.amitdroid.pkart.R
 import com.amitdroid.pkart.databinding.ActivityLoginBinding
 import com.google.firebase.FirebaseException
@@ -18,29 +17,31 @@ import java.util.concurrent.TimeUnit
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
+    private lateinit var builder: AlertDialog
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding =ActivityLoginBinding.inflate(layoutInflater)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.button2.setOnClickListener {
-            startActivity(Intent(this,RegisterActivity::class.java))
+            startActivity(Intent(this, RegisterActivity::class.java))
             finish()
         }
 
         binding.button.setOnClickListener {
+            val phoneNumber = binding.userNumber.text.toString()
 
-            if(binding.userNumber.text!!.isEmpty())
-
-                Toast.makeText(this,"Please Provide Number",Toast.LENGTH_SHORT).show()
-
-            else
-                sentOtp(binding.userNumber.text.toString())
+            if (phoneNumber.isEmpty()) {
+                Toast.makeText(this, "Please Provide Number", Toast.LENGTH_SHORT).show()
+            } else {
+                sendOtp(phoneNumber)
+            }
         }
     }
-    private lateinit var builder:AlertDialog
-    private fun sentOtp(number: String) {
+
+    private fun sendOtp(number: String) {
         builder = AlertDialog.Builder(this)
             .setTitle("Loading.........")
             .setMessage("Please Wait")
@@ -55,33 +56,26 @@ class LoginActivity : AppCompatActivity() {
             .setCallbacks(callbacks) // OnVerificationStateChangedCallbacks
             .build()
         PhoneAuthProvider.verifyPhoneNumber(options)
-
     }
 
-    val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-
+    private val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
         override fun onVerificationCompleted(credential: PhoneAuthCredential) {
-
-
+            // Handle verification completion if needed
         }
 
         override fun onVerificationFailed(e: FirebaseException) {
-
-
-
+            // Handle verification failure if needed
         }
 
         override fun onCodeSent(
             verificationId: String,
-            token: PhoneAuthProvider.ForceResendingToken,
+            token: PhoneAuthProvider.ForceResendingToken
         ) {
             builder.dismiss()
-            val intent =Intent(this@LoginActivity, OtpActivity::class.java)
-            intent.putExtra("VerificationId",verificationId)
-            intent.putExtra("number",binding.userNumber.text.toString())
+            val intent = Intent(this@LoginActivity, OtpActivity::class.java)
+            intent.putExtra("VerificationId", verificationId)
+            intent.putExtra("number", binding.userNumber.text.toString())
             startActivity(intent)
-
-
         }
     }
 }

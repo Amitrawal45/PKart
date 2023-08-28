@@ -31,9 +31,14 @@ class OtpActivity : AppCompatActivity() {
     }
 
     private fun verifyUser(otp: String) {
-        val verificationId = intent.getStringExtra("verificationId")
-        val credential = PhoneAuthProvider.getCredential(verificationId!!, otp)
-        signInWithPhoneAuthCredential(credential)
+        val verificationId = intent.getStringExtra("VerificationId")
+
+        if (verificationId != null) {
+            val credential = PhoneAuthProvider.getCredential(verificationId, otp)
+            signInWithPhoneAuthCredential(credential)
+        } else {
+            Toast.makeText(this, "Verification ID not found", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
