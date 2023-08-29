@@ -24,10 +24,15 @@ class AddressActivity : AppCompatActivity() {
 
         binding.proceed.setOnClickListener {
             validateData(
+                // remove space in future
                 binding.userNumber.text.toString(),
+
                 binding.userName.text.toString(),
+
                 binding.userState.text.toString(),
+
                 binding.userCity.text.toString(),
+
                 binding.userPinCode.text.toString()
             )
         }
