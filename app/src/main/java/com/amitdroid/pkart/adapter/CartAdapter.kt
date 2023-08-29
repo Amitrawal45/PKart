@@ -15,14 +15,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class CartAdapter(val context: Context, val list: List<ProductModel>):
-RecyclerView.Adapter<CartAdapter.CartViewHolder>(){
-    inner class CartViewHolder(val binding: LayoutCartItemBinding):
-            RecyclerView.ViewHolder(binding.root)
+class CartAdapter(val context: Context, val list: List<ProductModel>) :
+    RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
+    inner class CartViewHolder(val binding: LayoutCartItemBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
 
-        val binding = LayoutCartItemBinding.inflate(LayoutInflater.from(context),parent,false)
+        val binding = LayoutCartItemBinding.inflate(LayoutInflater.from(context), parent, false)
         return CartViewHolder(binding)
     }
 
@@ -33,11 +33,11 @@ RecyclerView.Adapter<CartAdapter.CartViewHolder>(){
     @OptIn(DelicateCoroutinesApi::class)
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
         Glide.with(context).load(list[position].productImg).into(holder.binding.imageView3)
-        holder.binding.textView5.text =list[position].productName
-        holder.binding.textView8.text =list[position].productSp
+        holder.binding.textView5.text = list[position].productName
+        holder.binding.textView8.text = list[position].productSp
 
         holder.itemView.setOnClickListener {
-            val intent = Intent(context,ProductDetailActivity::class.java)
+            val intent = Intent(context, ProductDetailActivity::class.java)
             intent.putExtra("id", list[position].productId)
             context.startActivity(intent)
 
@@ -49,10 +49,12 @@ RecyclerView.Adapter<CartAdapter.CartViewHolder>(){
             GlobalScope.launch(Dispatchers.IO) {
                 dao.deleteProduct(
                     ProductModel(
-                    list[position].productId,
-                    list[position].productName,
-                    list[position].productImg,
-                    list[position].productSp))
+                        list[position].productId,
+                        list[position].productName,
+                        list[position].productImg,
+                        list[position].productSp
+                    )
+                )
             }
 
         }

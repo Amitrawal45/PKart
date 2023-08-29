@@ -22,16 +22,16 @@ class CategoryActivity : AppCompatActivity() {
     private fun getProducts(category: String?) {
 
         val list = ArrayList<AddProductModel>()
-        Firebase.firestore.collection("products").whereEqualTo("productCategory",category)
+        Firebase.firestore.collection("products").whereEqualTo("productCategory", category)
             .get().addOnSuccessListener {
                 list.clear()
-                for(doc in it.documents){
+                for (doc in it.documents) {
 
                     val data = doc.toObject(AddProductModel::class.java)
                     list.add(data!!)
                 }
-                val recyclerView =findViewById<RecyclerView>(R.id.recyclerView)
-               recyclerView.adapter = CategoryProductAdapter(this,list)
+                val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
+                recyclerView.adapter = CategoryProductAdapter(this, list)
             }
     }
 }
