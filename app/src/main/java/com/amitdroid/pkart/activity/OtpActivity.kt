@@ -34,6 +34,11 @@ class OtpActivity : AppCompatActivity() {
         val verificationId = intent.getStringExtra("VerificationId")
 
         if (verificationId != null) {
+            val preferences = this.getSharedPreferences("users", MODE_PRIVATE)
+            val editor=preferences.edit()
+            editor.putString("number", intent.getStringExtra("number")!! )
+
+            editor.apply()
             val credential = PhoneAuthProvider.getCredential(verificationId, otp)
             signInWithPhoneAuthCredential(credential)
         } else {
@@ -45,6 +50,7 @@ class OtpActivity : AppCompatActivity() {
         FirebaseAuth.getInstance().signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
+
                     startActivity(Intent(this, MainActivity::class.java))
                     finish()
                 } else {
