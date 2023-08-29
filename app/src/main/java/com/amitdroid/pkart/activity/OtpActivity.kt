@@ -35,8 +35,8 @@ class OtpActivity : AppCompatActivity() {
 
         if (verificationId != null) {
             val preferences = this.getSharedPreferences("users", MODE_PRIVATE)
-            val editor=preferences.edit()
-            editor.putString("number", intent.getStringExtra("number")!! )
+            val editor = preferences.edit()
+            editor.putString("number", intent.getStringExtra("number")!!)
 
             editor.apply()
             val credential = PhoneAuthProvider.getCredential(verificationId, otp)

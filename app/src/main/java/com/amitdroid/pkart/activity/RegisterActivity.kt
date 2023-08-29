@@ -16,7 +16,7 @@ class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding= ActivityRegisterBinding.inflate(layoutInflater)
+        binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.button2.setOnClickListener {
@@ -29,9 +29,8 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun validateUser() {
-        if(binding.userName.text!!.isEmpty() || binding.userNumber.text!!.isEmpty())
-            Toast.makeText(this,"Please fill all field",Toast.LENGTH_LONG).show()
-
+        if (binding.userName.text!!.isEmpty() || binding.userNumber.text!!.isEmpty())
+            Toast.makeText(this, "Please fill all field", Toast.LENGTH_LONG).show()
         else
 
             storeData()
@@ -46,19 +45,22 @@ class RegisterActivity : AppCompatActivity() {
         builder.show()
 
         val preferences = this.getSharedPreferences("users", MODE_PRIVATE)
-        val editor=preferences.edit()
-        editor.putString("number", binding.userNumber.text.toString() )
-        editor.putString("name",binding.userName.text.toString())
+        val editor = preferences.edit()
+        editor.putString("number", binding.userNumber.text.toString())
+        editor.putString("name", binding.userName.text.toString())
         editor.apply()
 
-        val data = UserModel(userName =binding.userName.text.toString(), userNumber = binding.userNumber.text.toString() )
+        val data = UserModel(
+            userName = binding.userName.text.toString(),
+            userNumber = binding.userNumber.text.toString()
+        )
 
 
         Firebase.firestore.collection("users").document(binding.userNumber.text.toString())
 
             .set(data).addOnSuccessListener {
 
-                Toast.makeText(this,"User registered",Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "User registered", Toast.LENGTH_LONG).show()
                 builder.dismiss()
 
                 openLogIn()
@@ -67,14 +69,14 @@ class RegisterActivity : AppCompatActivity() {
 
             .addOnFailureListener {
 
-                Toast.makeText(this,"Something went wrong",Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show()
                 builder.dismiss()
 
             }
     }
 
     private fun openLogIn() {
-        startActivity(Intent(this,LoginActivity::class.java))
+        startActivity(Intent(this, LoginActivity::class.java))
         finish()
     }
 
